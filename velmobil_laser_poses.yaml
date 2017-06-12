@@ -1,0 +1,18 @@
+front_laser_pose:
+	 position:
+	 	 x: 0
+	 	 y: 0
+	 	 z: 0
+	 orientation:
+	 	 x: 0
+	 	 y: 0
+	 	 z: 0
+rear_laser_pose:
+	 position:
+	 	 x: -0.569478
+	 	 y: -0.0227072
+	 	 z: 0
+	 orientation:
+	 	 x: 0
+	 	 y: 0
+	 	 z: 3.1885

@@ -194,15 +194,55 @@ fprintf('   theta: %g [rad]',rotation )
 fprintf('\n')
 fprintf('\n')
 disp('LASER front:')
-fprintf('   X: %g [m]',dist_x/2 )
-fprintf('   Y: %g [m]',dist_y/2 )
-fprintf('   theta: %g [rad]',rotation/2 )
+fprintf('   X: %g [m]',0 )
+fprintf('   Y: %g [m]',0 )
+fprintf('   theta: %g [rad]',0 )
 fprintf('\n')
 disp('LASER rear:')
-fprintf('   X: %g [m]',-dist_x/2 )
-fprintf('   Y: %g [m]',-dist_y/2 )
-fprintf('   theta: %g [rad]',-rotation/2 )
+fprintf('   X: %g [m]',-dist_x )
+fprintf('   Y: %g [m]',-dist_y )
+fprintf('   theta: %g [rad]',deg2rad(180)+rotation )
 fprintf('\n')
+%%
+% write yaml file
+
+fileID = fopen('velmobil_laser_poses.yaml','w');
+fprintf(fileID,'front_laser_pose:\n');
+fprintf(fileID,'\t position:\n');
+fprintf(fileID,'\t \t x: %g\n',0);
+fprintf(fileID,'\t \t y: %g\n',0);
+fprintf(fileID,'\t \t z: %g\n',0);
+% quat = SpinCalc('EA321toQ',[rotation/2 0 0 ], 0.001,1);
+% fprintf(fileID,'\t orientation:\n');
+% fprintf(fileID,'\t \t x: %g\n', quat(1));
+% fprintf(fileID,'\t \t y: %g\n', quat(2));
+% fprintf(fileID,'\t \t z: %g\n', quat(3));
+% fprintf(fileID,'\t \t w: %g\n', quat(4));
+
+fprintf(fileID,'\t orientation:\n');
+fprintf(fileID,'\t \t x: %g\n', 0);
+fprintf(fileID,'\t \t y: %g\n', 0);
+fprintf(fileID,'\t \t z: %g\n', 0 );
+
+fprintf(fileID,'rear_laser_pose:\n');
+fprintf(fileID,'\t position:\n');
+fprintf(fileID,'\t \t x: %g\n',-dist_x);
+fprintf(fileID,'\t \t y: %g\n',-dist_y);
+fprintf(fileID,'\t \t z: %g\n',0);
+
+fprintf(fileID,'\t orientation:\n');
+fprintf(fileID,'\t \t x: %g\n', 0);
+fprintf(fileID,'\t \t y: %g\n', 0);
+fprintf(fileID,'\t \t z: %g\n', deg2rad(180)+rotation);
+
+% quat = SpinCalc('EA321toQ',[deg2rad(180)+rotation/2 0 0 ], 0.001,1);
+% fprintf(fileID,'\t orientation:\n');
+% fprintf(fileID,'\t \t x: %g\n', quat(1));
+% fprintf(fileID,'\t \t y: %g\n', quat(2));
+% fprintf(fileID,'\t \t z: %g\n', quat(3));
+% fprintf(fileID,'\t \t w: %g\n', quat(4));
+fclose(fileID);
+
 %%
 %  TEST
 
