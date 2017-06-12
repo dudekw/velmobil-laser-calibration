@@ -208,39 +208,39 @@ fprintf('\n')
 
 fileID = fopen('velmobil_laser_poses.yaml','w');
 fprintf(fileID,'front_laser_pose:\n');
-fprintf(fileID,'\t position:\n');
-fprintf(fileID,'\t \t x: %g\n',0);
-fprintf(fileID,'\t \t y: %g\n',0);
-fprintf(fileID,'\t \t z: %g\n',0);
+fprintf(fileID,'   position:\n');
+fprintf(fileID,'      x: %g\n',0);
+fprintf(fileID,'      y: %g\n',0);
+fprintf(fileID,'      z: %g\n',0);
 % quat = SpinCalc('EA321toQ',[rotation/2 0 0 ], 0.001,1);
-% fprintf(fileID,'\t orientation:\n');
-% fprintf(fileID,'\t \t x: %g\n', quat(1));
-% fprintf(fileID,'\t \t y: %g\n', quat(2));
-% fprintf(fileID,'\t \t z: %g\n', quat(3));
-% fprintf(fileID,'\t \t w: %g\n', quat(4));
+% fprintf(fileID,'   orientation:\n');
+% fprintf(fileID,'      x: %g\n', quat(1));
+% fprintf(fileID,'      y: %g\n', quat(2));
+% fprintf(fileID,'      z: %g\n', quat(3));
+% fprintf(fileID,'      w: %g\n', quat(4));
 
-fprintf(fileID,'\t orientation:\n');
-fprintf(fileID,'\t \t x: %g\n', 0);
-fprintf(fileID,'\t \t y: %g\n', 0);
-fprintf(fileID,'\t \t z: %g\n', 0 );
+fprintf(fileID,'   orientation:\n');
+fprintf(fileID,'      x: %g\n', 0);
+fprintf(fileID,'      y: %g\n', 0);
+fprintf(fileID,'      z: %g\n', 0 );
 
 fprintf(fileID,'rear_laser_pose:\n');
-fprintf(fileID,'\t position:\n');
-fprintf(fileID,'\t \t x: %g\n',-dist_x);
-fprintf(fileID,'\t \t y: %g\n',-dist_y);
-fprintf(fileID,'\t \t z: %g\n',0);
+fprintf(fileID,'   position:\n');
+fprintf(fileID,'      x: %g\n',-dist_x);
+fprintf(fileID,'      y: %g\n',-dist_y);
+fprintf(fileID,'      z: %g\n',0);
 
-fprintf(fileID,'\t orientation:\n');
-fprintf(fileID,'\t \t x: %g\n', 0);
-fprintf(fileID,'\t \t y: %g\n', 0);
-fprintf(fileID,'\t \t z: %g\n', deg2rad(180)+rotation);
+fprintf(fileID,'   orientation:\n');
+fprintf(fileID,'      x: %g\n', 0);
+fprintf(fileID,'      y: %g\n', 0);
+fprintf(fileID,'      z: %g\n', deg2rad(180)+rotation);
 
 % quat = SpinCalc('EA321toQ',[deg2rad(180)+rotation/2 0 0 ], 0.001,1);
-% fprintf(fileID,'\t orientation:\n');
-% fprintf(fileID,'\t \t x: %g\n', quat(1));
-% fprintf(fileID,'\t \t y: %g\n', quat(2));
-% fprintf(fileID,'\t \t z: %g\n', quat(3));
-% fprintf(fileID,'\t \t w: %g\n', quat(4));
+% fprintf(fileID,'   orientation:\n');
+% fprintf(fileID,'      x: %g\n', quat(1));
+% fprintf(fileID,'      y: %g\n', quat(2));
+% fprintf(fileID,'      z: %g\n', quat(3));
+% fprintf(fileID,'      w: %g\n', quat(4));
 fclose(fileID);
 
 %%
