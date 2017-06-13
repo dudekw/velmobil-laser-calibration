@@ -10,7 +10,7 @@ rho_lines = [0 0;
 init_dist = [0 0 0];
 init_rot  = rotz(180);
 
-% 
+%%
 %  IMPORTANT  !!!!!
 %
 % use average value of computed rotations
@@ -22,6 +22,10 @@ average = 1;
 % align to line 1 or line 2
 %align = 1;
 %align = 2;
+
+% File format
+% file_format = 'yaml';
+file_format = 'xacro';
 
 %%
 % Calculate lines for front laser
@@ -203,35 +207,50 @@ fprintf('   X: %g [m]',-dist_x )
 fprintf('   Y: %g [m]',-dist_y )
 fprintf('   theta: %g [rad]',deg2rad(180)+rotation )
 fprintf('\n')
-%%
-% write yaml file
 
-fileID = fopen('velmobil_laser_poses.yaml','w');
-fprintf(fileID,'front_laser_pose:\n');
-fprintf(fileID,'   x: %g\n',0);
-fprintf(fileID,'   y: %g\n',0);
-fprintf(fileID,'   theta: %g\n',0);
+if file_format == 'yaml'
+  %%
+  % write yaml file
 
-% quat = SpinCalc('EA321toQ',[rotation/2 0 0 ], 0.001,1);
-% fprintf(fileID,'   orientation:\n');
-% fprintf(fileID,'      x: %g\n', quat(1));
-% fprintf(fileID,'      y: %g\n', quat(2));
-% fprintf(fileID,'      z: %g\n', quat(3));
-% fprintf(fileID,'      w: %g\n', quat(4));
+  fileID = fopen('velmobil_laser_poses.yaml','w');
+  fprintf(fileID,'front_laser_pose:\n');
+  fprintf(fileID,'   x: %g\n',0);
+  fprintf(fileID,'   y: %g\n',0);
+  fprintf(fileID,'   theta: %g\n',0);
 
-fprintf(fileID,'rear_laser_pose:\n');
-fprintf(fileID,'   x: %g\n',-dist_x);
-fprintf(fileID,'   y: %g\n',-dist_y);
-fprintf(fileID,'   theta: %g\n', deg2rad(180)+rotation);
+  % quat = SpinCalc('EA321toQ',[rotation/2 0 0 ], 0.001,1);
+  % fprintf(fileID,'   orientation:\n');
+  % fprintf(fileID,'      x: %g\n', quat(1));
+  % fprintf(fileID,'      y: %g\n', quat(2));
+  % fprintf(fileID,'      z: %g\n', quat(3));
+  % fprintf(fileID,'      w: %g\n', quat(4));
 
-% quat = SpinCalc('EA321toQ',[deg2rad(180)+rotation/2 0 0 ], 0.001,1);
-% fprintf(fileID,'   orientation:\n');
-% fprintf(fileID,'      x: %g\n', quat(1));
-% fprintf(fileID,'      y: %g\n', quat(2));
-% fprintf(fileID,'      z: %g\n', quat(3));
-% fprintf(fileID,'      w: %g\n', quat(4));
-fclose(fileID);
+  fprintf(fileID,'rear_laser_pose:\n');
+  fprintf(fileID,'   x: %g\n',-dist_x);
+  fprintf(fileID,'   y: %g\n',-dist_y);
+  fprintf(fileID,'   theta: %g\n', deg2rad(180)+rotation);
 
+  % quat = SpinCalc('EA321toQ',[deg2rad(180)+rotation/2 0 0 ], 0.001,1);
+  % fprintf(fileID,'   orientation:\n');
+  % fprintf(fileID,'      x: %g\n', quat(1));
+  % fprintf(fileID,'      y: %g\n', quat(2));
+  % fprintf(fileID,'      z: %g\n', quat(3));
+  % fprintf(fileID,'      w: %g\n', quat(4));
+  fclose(fileID);
+
+elseif file_format == 'xacro'
+  %%
+  % write xacro file
+
+  fileID = fopen('velmobil_laser_poses.xacro','w');
+  fprintf(fileID,'<xacro:property name=\"front_laser_origin_from_calibration\"> \n' ...
+                  '<origin xyz=\"0 0 0\" rpy=\"0 0 0\" /> \n' ...
+                  '</xacro:property> \n');
+  fprintf(fileID,'<xacro:property name=\"rear_laser_origin_from_calibration\"> \n' ...
+                  '<origin xyz=\"-dist_x -dist_y 0\" rpy=\"0 0 deg2rad(180)+rotation\" /> \n' ...
+                  '</xacro:property> \n');
+  fclose(fileID);
+end
 %%
 %  TEST
 
