@@ -208,7 +208,7 @@ fprintf('   Y: %g [m]',-dist_y )
 fprintf('   theta: %g [rad]',deg2rad(180)+rotation )
 fprintf('\n')
 
-if file_format == 'yaml'
+if strcmp(file_format,'yaml')
   %%
   % write yaml file
 
@@ -238,17 +238,17 @@ if file_format == 'yaml'
   % fprintf(fileID,'      w: %g\n', quat(4));
   fclose(fileID);
 
-elseif file_format == 'xacro'
+elseif strcmp(file_format,'xacro')
   %%
   % write xacro file
 
   fileID = fopen('velmobil_laser_poses.xacro','w');
-  fprintf(fileID,'<xacro:property name=\"front_laser_origin_from_calibration\"> \n' ...
-                  '<origin xyz=\"0 0 0\" rpy=\"0 0 0\" /> \n' ...
-                  '</xacro:property> \n');
-  fprintf(fileID,'<xacro:property name=\"rear_laser_origin_from_calibration\"> \n' ...
-                  '<origin xyz=\"-dist_x -dist_y 0\" rpy=\"0 0 deg2rad(180)+rotation\" /> \n' ...
-                  '</xacro:property> \n');
+  fprintf(fileID,['<xacro:property name=\"front_laser_origin_from_calibration\"> \n' ...
+                  '   <origin xyz=\"0 0 0\" rpy=\"0 0 0\" /> \n' ...
+                  '</xacro:property> \n']);
+  fprintf(fileID,['<xacro:property name=\"rear_laser_origin_from_calibration\"> \n' ...
+                  '   <origin xyz=\"-dist_x -dist_y 0\" rpy=\"0 0 deg2rad(180)+rotation\" /> \n' ...
+                  '</xacro:property> \n']);
   fclose(fileID);
 end
 %%

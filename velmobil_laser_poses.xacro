@@ -1,0 +1,6 @@
+<xacro:property name="front_laser_origin_from_calibration"> 
+   <origin xyz="0 0 0" rpy="0 0 0" /> 
+</xacro:property> 
+<xacro:property name="rear_laser_origin_from_calibration"> 
+   <origin xyz="-dist_x -dist_y 0" rpy="0 0 deg2rad(180)+rotation" /> 
+</xacro:property> 
